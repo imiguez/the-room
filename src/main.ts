@@ -8,6 +8,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port = configService.get('port');
   app.useGlobalPipes(new ValidationPipe());
+  app.setGlobalPrefix('api');
   await app.listen(port);
   console.log(
     `Server running in ${process.env.NODE_ENV} environment on port ${port}!`,

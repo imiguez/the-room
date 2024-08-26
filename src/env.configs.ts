@@ -4,6 +4,7 @@ export default () => {
     case 'prod':
       config = {
         port: parseInt(process.env.PROD_NEST_PORT, 10) || 3000,
+        baseURL: process.env.PROD_BASE_URL,
         database: {
           host: process.env.MONGOHOST,
           port: process.env.PROD_MONGOPORT,
@@ -16,6 +17,7 @@ export default () => {
     case 'docker':
       config = {
         port: parseInt(process.env.DOCKER_NEST_PORT, 10) || 3000,
+        baseURL: process.env.DOCKER_BASE_URL,
         database: {
           host: process.env.MONGOHOST,
           port: process.env.DOCKER_MONGOPORT,
@@ -28,6 +30,7 @@ export default () => {
     default:
       config = {
         port: parseInt(process.env.DEV_NEST_PORT, 10) || 3000,
+        baseURL: process.env.DEV_BASE_URL,
         database: {
           host: process.env.MONGOHOST,
           port: process.env.DEV_MONGOPORT,
@@ -38,5 +41,10 @@ export default () => {
       };
       break;
   }
+  // Adding Google OAuth credentials.
+  config.google = {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  };
   return config;
 };
