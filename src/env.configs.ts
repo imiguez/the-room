@@ -46,5 +46,14 @@ export default () => {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   };
+  // Adding Redis configurations.
+  config.redis = {
+    port: process.env.REDIS_PORT || 6379,
+    host: process.env.REDIS_HOST || 'redis-sessions',
+  };
+  // Adding Express-Session configurations.
+  config.expressSession = {
+    secret: process.env.EXPRESS_SESSION_SECRET,
+  };
   return config;
 };

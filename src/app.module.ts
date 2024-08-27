@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import envConfigs from './env.configs';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import envConfigs from './env.configs';
         pass: configService.get<string>('database.pass'),
       }),
     }),
+    PassportModule.register({ session: true }),
     UsersModule,
     AuthModule,
   ],

@@ -5,13 +5,19 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { UsersService } from 'src/users/users.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/users/schema/user.schema';
+import { ExpressSessionSerializer } from './serializer';
 
 // The user Model is imported because usersService from AuthService uses it.
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
-  providers: [AuthService, UsersService, GoogleStrategy],
+  providers: [
+    AuthService,
+    UsersService,
+    GoogleStrategy,
+    ExpressSessionSerializer,
+  ],
   controllers: [AuthController],
 })
 export class AuthModule {}

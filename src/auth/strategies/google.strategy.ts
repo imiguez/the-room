@@ -15,7 +15,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
     super({
       clientID: google.clientID,
       clientSecret: google.clientSecret,
-      callbackURL: `${configService.get('baseURL')}/auth/google/callback`,
+      callbackURL: `${configService.get('baseURL')}/api/auth/google/callback`,
       scope: ['email', 'profile'],
     });
   }
@@ -33,7 +33,9 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
     profile: Profile,
     done: VerifyCallback,
   ): Promise<void> {
-    const user = this.authService.validateGoogleUser(profile);
-    done(null, user);
+    const user = await this.authService.validateOrCreateGoogleUser(profile);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { _id, firstName, lastName, imageUrl, ...theRestOfTheUser } = user;
+    done(null, { _id, firstName, lastName, imageUrl });
   }
 }

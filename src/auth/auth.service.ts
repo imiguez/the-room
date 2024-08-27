@@ -7,7 +7,7 @@ import { UsersService } from 'src/users/users.service';
 export class AuthService {
   constructor(@Inject() private usersService: UsersService) {}
 
-  async validateGoogleUser(profile: Profile): Promise<User> {
+  async validateOrCreateGoogleUser(profile: Profile): Promise<User> {
     let user = await this.usersService.findOneByEmail(profile.emails[0].value);
     if (!user) {
       user = await this.usersService.create({
