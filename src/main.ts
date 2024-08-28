@@ -5,6 +5,8 @@ import { ConfigService } from '@nestjs/config';
 import { createClient } from 'redis';
 import * as session from 'express-session';
 import * as passport from 'passport';
+import * as mongoSanitize from 'express-mongo-sanitize';
+import helmet from 'helmet';
 import RedisStore from 'connect-redis';
 import { ExpressSessionUser } from './auth/types/user-express-session.type';
 
@@ -18,8 +20,9 @@ declare module 'express-session' {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const configService = app.get(ConfigService);
 
+  const configService = app.get(ConfigService);
+  const appPort = configService.get('port');
   const { host, port } = configService.get('redis');
 
   // Initialize client.
@@ -34,11 +37,14 @@ async function bootstrap() {
     prefix: 'sess:',
   });
 
-  const appPort = configService.get('port');
-
-  app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('api');
 
+  // MIDDLEWARES.
+  app.useGlobalPipes(new ValidationPipe());
+  // Secure HTTP Headers.
+  app.use(helmet());
+  // Sanitize incoming requests by preventing NoSQL Injections.
+  app.use(mongoSanitize());
   // Initialize session storage.
   app.use(
     session({
