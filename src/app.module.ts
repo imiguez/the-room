@@ -19,8 +19,6 @@ import { PassportModule } from '@nestjs/passport';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         uri: configService.get<string>('database.url'),
-        user: configService.get<string>('database.user'),
-        pass: configService.get<string>('database.pass'),
       }),
     }),
     PassportModule.register({ session: true }),

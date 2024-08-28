@@ -6,6 +6,15 @@ import { createClient } from 'redis';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import RedisStore from 'connect-redis';
+import { ExpressSessionUser } from './auth/types/user-express-session.type';
+
+declare module 'express-session' {
+  interface SessionData {
+    passport?: {
+      user?: ExpressSessionUser;
+    };
+  }
+}
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -47,6 +56,7 @@ async function bootstrap() {
   );
   app.use(passport.initialize());
   app.use(passport.session());
+
   await app.listen(appPort);
   console.log(
     `Server running in ${process.env.NODE_ENV} environment on port ${appPort}!`,
