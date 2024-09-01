@@ -64,6 +64,7 @@ async function bootstrap() {
   app.use(passport.session());
 
   await app.listen(appPort);
+
   console.log(
     `Server running in ${process.env.NODE_ENV} environment on port ${appPort}!`,
   );

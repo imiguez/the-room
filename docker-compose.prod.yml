@@ -1,0 +1,61 @@
+version: '3.9'
+
+services:
+  nextjs-app:
+    container_name: the-room-frontend
+    build:
+      context: ./frontend
+      target: prod
+    env_file:
+    - ./frontend/.env
+    expose:
+      - "8080"  # Internal Docker network port
+    depends_on:
+      - nestjs-app
+  
+  nestjs-app:
+    container_name: the-room-backend
+    build: 
+      context: ./backend
+      target: prod
+    env_file:
+      - ./backend/.env
+    expose:
+      - "3000"
+    depends_on:
+      - mongo
+      - redis-sessions
+
+  mongo:
+    container_name: the-room-db
+    image: mongo:7
+    environment:
+    - MONGO_INITDB_DATABASE=the-room
+    expose:
+      - "27017"
+    volumes:
+      - app-volume:/data/db
+
+  redis-sessions:
+    container_name: the-room-sessions-storage
+    image: redis:latest
+    expose:
+      - "6379"
+    volumes:
+      - app-volume:/data
+
+  nginx:
+    container_name: the-room-reverse-proxy
+    image: nginx:latest
+    ports:
+      - "80:80"   # HTTP port
+      - "443:443" # HTTPS port
+    depends_on:
+      - nestjs-app
+      - nextjs-app
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      # - ./ssl:/etc/nginx/ssl # Directory for SSL certificates
+
+volumes:
+  app-volume:
