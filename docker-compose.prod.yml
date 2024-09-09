@@ -7,7 +7,7 @@ services:
       context: ./frontend
       target: prod
     env_file:
-    - ./frontend/.env
+    - ./frontend/.env.prod
     expose:
       - "8080"  # Internal Docker network port
     depends_on:

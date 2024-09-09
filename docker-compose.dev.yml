@@ -7,7 +7,7 @@ services:
       context: ./frontend
       target: dev
     env_file:
-    - ./frontend/.env
+    - ./frontend/.env.dev
     expose:
       - "8080"  # Internal Docker network port
     command: npm run dev --reload

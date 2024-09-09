@@ -54,6 +54,7 @@ async function bootstrap() {
       secret:
         configService.get<string>('expressSession.secret') || 'default_secret',
       cookie: {
+        httpOnly: true,
         secure: process.env.NODE_ENV == 'prod',
         maxAge:
           process.env.NODE_ENV == 'prod' ? 1000 * 60 * 60 * 24 : 1000 * 60,

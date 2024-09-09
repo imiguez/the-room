@@ -1,9 +1,9 @@
 export default () => {
   const config = {
     port: parseInt(process.env.PORT, 10) || 3000,
-    baseURL: process.env.ENV_BASE_URL,
+    baseURL: process.env.DEV_BASE_URL,
     database: {
-      url: process.env.ENV_MONGO_URL,
+      url: process.env.DEV_MONGO_URL,
     },
     // Adding Google OAuth credentials.
     google: {

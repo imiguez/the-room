@@ -105,3 +105,27 @@ a {
     color-scheme: dark;
   }
 }
+
+
+@media screen and (max-width: 500px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .title {
+    color: blueviolet;
+    width: auto;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: var(--font-bungee);
+    margin-top: 5vh;
+    letter-spacing: 4px;
+    text-shadow:
+      -3px 2px 4px #00ffff,
+      3px -2px 4px #ff00ff;
+  }
+}

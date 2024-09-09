@@ -1,17 +1,11 @@
-.main {
+.googleAuthBtn {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  /* padding: 6rem; */
-  min-height: 100vh;
+  min-width: 100px;
+  padding: 5px 10px;
+  margin-top: 50vh;
 }
 
-.title {
-  color: blueviolet;
-  width: auto;
-  text-align: center;
-  font-size: 4rem;
-  font-weight: 700;
-  font-family: var(--font-bungee);
+.googleIcon {
+  margin-right: 10px;
 }
