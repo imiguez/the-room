@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import envConfigs from './env.configs';
 import { PassportModule } from '@nestjs/passport';
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { PassportModule } from '@nestjs/passport';
     PassportModule.register({ session: true }),
     UsersModule,
     AuthModule,
+    MessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
