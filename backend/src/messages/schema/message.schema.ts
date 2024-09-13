@@ -16,7 +16,7 @@ export class Message {
     required: true,
     maxlength: [300, 'Message cannot be more than 300 characters long'],
   })
-  text: string;
+  content: string;
 
   @Prop({ required: false, type: Date, default: () => new Date() })
   date: Date;

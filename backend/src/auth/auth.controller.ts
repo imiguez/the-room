@@ -27,16 +27,22 @@ export class AuthController {
     res.redirect(`${this.configService.get<string>('baseURL')}/auth/login`);
   }
 
-  @Get()
+  @Get('authenticate-frontend')
   @Public()
   loginHandler(@Req() req: Request) {
     if (req.session.passport.user) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { _id, ...user } = req.session.passport.user;
       return {
         expires: req.session.cookie.expires,
-        user: user,
+        user: req.session.passport.user,
       };
     } else throw new UnauthorizedException();
+  }
+
+  @Get('logout')
+  @Public()
+  logoutHandler(@Req() req: Request, @Res() res: Response) {
+    if (req.session.passport.user) {
+      req.session.destroy(() => res.send('Session destroyed.').status(200));
+    }
   }
 }

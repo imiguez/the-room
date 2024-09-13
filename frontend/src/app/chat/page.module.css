@@ -1,0 +1,88 @@
+@media screen and (max-width: 500px) {
+
+  .nav {
+    width: 100vw;
+    height: 100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .imageContainer {
+    border-radius: 50px;
+    height: 74px;
+    width: 74px;
+    border: 2px solid white;
+    overflow: hidden;
+    margin-right: 5vw;
+  }
+
+  .navOptionsContainer {
+    list-style: none;
+    position: absolute;
+    border: 2px solid rgb(222, 222, 222);
+    right: 5vw;
+    top: 100px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: white;
+    font-family: var(--font-roboto);
+  }
+  
+  .navOptions {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 20px;
+    color: black;
+    min-width: 200px;
+    cursor: pointer;
+  }
+  
+  .navOptions i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  .scrollMessagesContainer {
+    width: 90vw;
+    height: 70vh;
+    margin-top: 10px;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .messageForm {
+    width: 90vw;
+    max-height: calc(20vh);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .messageInput {
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-size: 18px;
+    width: calc(90vw - 55px);
+  }
+
+  .messageFormBtn {
+    width: 50px;
+    aspect-ratio: 1;
+    color: white;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .messageFormBtn i {
+    font-size: 40px;
+    display: flex;
+  }
+}
+

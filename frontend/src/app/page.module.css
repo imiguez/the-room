@@ -1,0 +1,44 @@
+@media screen and (max-width: 500px) {
+  .title {
+    color: blueviolet;
+    width: auto;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: var(--font-bungee);
+    margin-top: 5vh;
+    margin-bottom: 50vh;
+    letter-spacing: 4px;
+    text-shadow:
+      -3px 2px 4px #00ffff,
+      3px -2px 4px #ff00ff;
+  }
+
+  .googleAuthBtn, .optionsBtns {
+    display: flex;
+    align-items: center;
+    min-width: 150px;
+    padding: 5px 10px;
+    margin-top: 10px;
+  }
+  
+  .optionsBtns {
+    justify-content: center;
+  }
+
+  .googleIcon {
+    margin-right: 10px;
+  }
+
+  .optionsBtns i {
+    font-size: 20px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  i#chatIcon {
+    font-size: 18px;
+  }
+
+}

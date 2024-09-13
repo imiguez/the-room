@@ -23,7 +23,12 @@ export class MessagesService {
       .sort({ date: -1 }) // Order by date, descending (newest first)
       .skip(skip) // Skip the documents based on the page number
       .limit(limit) // Limit the number of documents per page
-      .populate('author') // Fill in the author property
+      .populate({
+        path: 'author',
+        select: {
+          email: 0,
+        },
+      }) // Fill in the author property without the email
       .exec(); // Execute the query
   }
 
