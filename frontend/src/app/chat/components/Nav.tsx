@@ -4,15 +4,13 @@ import React, { FC, useState } from 'react';
 import Image from 'next/image';
 import { SessionUser } from 'types/users.type';
 import { useRouter } from 'next/navigation';
+import styles from "../page.module.css";
 
 interface INav {
   session: SessionUser | null,
-  styles: {
-    readonly [key: string]: string;
-  },
 }
 
-const Nav: FC<INav> = ({ session, styles }) => {
+const Nav: FC<INav> = ({ session }) => {
   const router = useRouter();
   const [clicked, setClicked] = useState(false);
 

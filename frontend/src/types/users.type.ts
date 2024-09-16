@@ -4,9 +4,3 @@ export type SessionUser = {
   lastName: string,
   imageUrl: string
 }
-
-export type MessageAuthor = {
-  firstName: string,
-  lastName: string,
-  imageUrl: string
-}

@@ -1,9 +1,9 @@
 'use server'
 
-import styles from "./page.module.css";
-import Nav from "components/Nav";
 import { getSession } from "cookie-handler";
-import MessageImput from "components/MessageInput";
+import Nav from "./components/Nav";
+import MessageImput from "./components/MessageInput";
+import { ChatContainer } from "./components/ChatContainer";
 
 
 export default async function ChatRoom() {
@@ -11,13 +11,11 @@ export default async function ChatRoom() {
 
   return (
     <main className={'main'}>
-      <Nav session={session} styles={styles}/>
+      <Nav session={session} />
 
-      <section className={styles.scrollMessagesContainer} >
+      <ChatContainer session={session}/>
 
-      </section>
-      <MessageImput styles={styles}/>
-
+      <MessageImput />
     </main>
   );
 }

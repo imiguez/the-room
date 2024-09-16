@@ -2,14 +2,10 @@
 
 import { sendMessage } from 'app/chat/actions';
 import React, { FC, useState } from 'react'
+import styles from "../page.module.css";
 
-interface IMessageImput {
-  styles: {
-    readonly [key: string]: string;
-  },
-}
 
-export const MessageImput: FC<IMessageImput> = ({ styles }) => {
+export const MessageImput: FC = () => {
   const [message, setMessage] = useState<string>('')
   const onTextChange = (e: any) => {
     setMessage(e.target.value);
@@ -21,7 +17,8 @@ export const MessageImput: FC<IMessageImput> = ({ styles }) => {
       }
     }>
       <input type="text" placeholder="Send a message..." className={styles.messageInput} onChange={onTextChange} value={message}/>
-      <button type="submit" className={styles.messageFormBtn} disabled={ message == '' }><i className="bi bi-arrow-right-circle-fill"></i></button>
+      <button type="submit" className={styles.messageFormBtn} disabled={ message == '' } 
+        style={{ color: message !== '' ? 'blueviolet' : 'grey' }}><i className="bi bi-arrow-right-circle-fill"></i></button>
     </form>
   )
 }

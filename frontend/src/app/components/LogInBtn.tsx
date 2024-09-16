@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react'
 import Image from "next/image";
-import styles from "./../app/page.module.css";
+import styles from "app/page.module.css";
 import { useRouter } from 'next/navigation';
 import { SessionUser } from 'types/users.type';
 
@@ -14,7 +14,7 @@ const LogInBtn: FC<ILogInBtn> = ({ session }) => {
   const router = useRouter();
 
   const handleGoogleLogin = () => window.location.href = '/api/auth/google/login';
-  const handleRedirect = () => window.location.href = '/chat';
+  const handleRedirectToChat = () => window.location.href = '/chat';
   const handleLogout = async () => {
     await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`);
     router.refresh(); // Triggers a re-render and fetches fresh session data
@@ -34,7 +34,7 @@ const LogInBtn: FC<ILogInBtn> = ({ session }) => {
             <i className="bi bi-box-arrow-left"></i>
           </button>
 
-          <button onClick={handleRedirect} className={styles.optionsBtns}>
+          <button onClick={handleRedirectToChat} className={styles.optionsBtns}>
             Go to the chat
             <i className="bi bi-chat-right-dots-fill" id={styles.chatIcon}></i>
           </button>

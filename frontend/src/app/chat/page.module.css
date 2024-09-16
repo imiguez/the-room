@@ -1,4 +1,74 @@
 @media screen and (max-width: 500px) {
+  
+  
+  /* ------------------------------------------------ LOADER --------------------------------------------------------- */
+
+
+  .chatLoader {
+    top: calc(-50% + 3rem);
+    left: calc(50% - 3rem);
+    scale: .8;
+  }
+
+  .loadMoreLoader {
+    left: calc(50% - 3rem);
+    scale: .4;
+  }
+
+  .loader {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 6rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  .loader:before,
+  .loader:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    animation: pulsOut 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 0.75));
+  }
+  .loader:before {
+    width: 100%;
+    padding-bottom: 100%;
+    box-shadow: inset 0 0 0 1rem #fff;
+    animation-name: pulsIn;
+  }
+  .loader:after {
+    width: calc(100% - 2rem);
+    padding-bottom: calc(100% - 2rem);
+    box-shadow: 0 0 0 0 #fff;
+  }
+
+  @keyframes pulsIn {
+    0% {
+      box-shadow: inset 0 0 0 1rem #fff;
+      opacity: 1;
+    }
+    50%, 100% {
+      box-shadow: inset 0 0 0 0 #fff;
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulsOut {
+    0%, 50% {
+      box-shadow: 0 0 0 0 #fff;
+      opacity: 0;
+    }
+    100% {
+      box-shadow: 0 0 0 1rem #fff;
+      opacity: 1;
+    }
+  }
+
+
+  /* ------------------------------------------------ NAV --------------------------------------------------------- */
 
   .nav {
     width: 100vw;
@@ -20,12 +90,13 @@
   .navOptionsContainer {
     list-style: none;
     position: absolute;
-    border: 2px solid rgb(222, 222, 222);
+    z-index: 1;
+    border: 2px solid rgba(50, 50, 50, 0.782);
     right: 5vw;
     top: 100px;
     overflow: hidden;
     border-radius: 10px;
-    background-color: white;
+    background-color: #575757;
     font-family: var(--font-roboto);
   }
   
@@ -33,7 +104,7 @@
     font-size: 20px;
     font-weight: bold;
     padding: 15px 20px;
-    color: black;
+    color: white;
     min-width: 200px;
     cursor: pointer;
   }
@@ -43,6 +114,10 @@
     margin-right: 10px;
   }
 
+
+  /* ------------------------------------------------ SCROLL CONTAINER --------------------------------------------------------- */
+
+
   .scrollMessagesContainer {
     width: 90vw;
     height: 70vh;
@@ -50,7 +125,86 @@
     border: 1px solid white;
     display: flex;
     flex-direction: column-reverse;
+    overflow-y: scroll;
   }
+
+  .loadMoreBtn {
+    min-height: 60px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  
+  /* ------------------------------------------------ MESSAGES --------------------------------------------------------- */
+
+  .peopleMessageContainer, .myMessageContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    width: 90%;
+    position: relative;
+  }
+
+  .myMessageContainer {
+    width: calc(90% - 52px - 5px);
+    margin-left: calc(10% + 48px);
+  }
+
+  .profileImg {
+    width: 52px;
+    height: 52px;
+    border: 1px solid white;
+    border-radius: 50px;
+    margin-left: 5px;
+  }
+
+  .messageContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(227, 227, 227);
+    margin-top: 10px;
+    color: black;
+  }
+
+  .leftTriangle, .rightTriangle {
+    background-color: rgb(227, 227, 227);
+    height: 15px;
+    margin-top: 14px;
+    z-index: -1;
+    position: absolute;
+    transform: rotate(45deg);
+    width: 15px;
+  }
+
+  .leftTriangle { right: calc(100% - 70px - 10px); }
+  .rightTriangle { right: 4px; }
+
+  .peopleMessageContainer .messageContainer { width: calc(100% - 70px); }
+  
+  .myMessageContainer .messageContainer {
+    width: calc(100%);
+    margin-right: 9px;
+  }
+
+  .content {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 0;
+    color: #575757;
+  }
+
+  .date {
+    text-align: end;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+
+
+  /* ------------------------------------------------ MESSAGE INPUT --------------------------------------------------------- */
+
 
   .messageForm {
     width: 90vw;
@@ -84,5 +238,5 @@
     font-size: 40px;
     display: flex;
   }
-}
 
+}

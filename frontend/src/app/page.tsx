@@ -1,8 +1,8 @@
 'use server'
 
-import LogInBtn from "components/LogInBtn";
 import { getSession } from "cookie-handler";
 import styles from "./page.module.css";
+import LogInBtn from "./components/LogInBtn";
 
 export default async function Home() {
   const session = await getSession();

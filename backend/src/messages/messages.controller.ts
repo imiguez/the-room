@@ -24,9 +24,9 @@ export class MessagesController {
 
   @Get('?')
   async getAllMessagesByPagination(
-    @Query('page') page: number,
-  ): Promise<Message[]> {
-    return this.messagesService.findAllMessagesByPagination(page);
+    @Query('last-message-date') lastMessageDate: Date,
+  ): Promise<{ messages: Message[]; hasMorePages: boolean }> {
+    return this.messagesService.findAllMessagesByPagination(lastMessageDate);
   }
 
   @Get(':id')

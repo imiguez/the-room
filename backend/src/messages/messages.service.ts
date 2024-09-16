@@ -15,21 +15,38 @@ export class MessagesService {
     return createdMessage.save();
   }
 
-  async findAllMessagesByPagination(page: number): Promise<Message[]> {
+  async findAllMessagesByPagination(
+    lastMessageDate: Date,
+  ): Promise<{ messages: Message[]; hasMorePages: boolean }> {
+    lastMessageDate = lastMessageDate ? new Date(lastMessageDate) : new Date();
     const limit = 20;
-    const skip = (page - 1) * limit;
-    return this.messageModel
-      .find() // Fetch all messages
+    const messages = await this.messageModel
+      .find({
+        date: { $lt: lastMessageDate }, // Filter for documents with date earlier than the given date
+      })
       .sort({ date: -1 }) // Order by date, descending (newest first)
-      .skip(skip) // Skip the documents based on the page number
-      .limit(limit) // Limit the number of documents per page
+      .limit(limit)
       .populate({
         path: 'author',
         select: {
           email: 0,
         },
-      }) // Fill in the author property without the email
-      .exec(); // Execute the query
+      }) // Fill in the author property without the email.
+      .exec();
+
+    let hasMorePages = false;
+    if (messages.length > 0) {
+      // If the amount of messages are less than the limit it means that the query reach the last message, thus there isn't more pages.
+      if (messages.length < limit) hasMorePages = false;
+      else {
+        const lastMessageDate = new Date(messages[messages.length - 1].date);
+        hasMorePages =
+          (await this.messageModel.countDocuments({
+            date: { $lt: lastMessageDate },
+          })) > 0;
+      }
+    }
+    return { messages, hasMorePages };
   }
 
   async findAllMessagesByUser(id: string): Promise<Message[]> {

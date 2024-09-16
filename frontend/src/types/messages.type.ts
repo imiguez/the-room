@@ -1,11 +1,12 @@
-import { MessageAuthor } from "./users.type"
+import { SessionUser } from "./users.type"
 
 export type CreateMessage = {
   content: string,
 }
 
 export type Message = {
+  _id: string,
   content: string,
-  author: MessageAuthor,
+  author: SessionUser,
   date: Date,
 }
