@@ -15,7 +15,7 @@ export class MessagesService {
     return createdMessage.save();
   }
 
-  async findAllMessagesByPagination(
+  async loadMoreMessages(
     lastMessageDate: Date,
   ): Promise<{ messages: Message[]; hasMorePages: boolean }> {
     lastMessageDate = lastMessageDate ? new Date(lastMessageDate) : new Date();

@@ -23,10 +23,10 @@ export class MessagesController {
   }
 
   @Get('?')
-  async getAllMessagesByPagination(
+  async loadMoreMessages(
     @Query('last-message-date') lastMessageDate: Date,
   ): Promise<{ messages: Message[]; hasMorePages: boolean }> {
-    return this.messagesService.findAllMessagesByPagination(lastMessageDate);
+    return this.messagesService.loadMoreMessages(lastMessageDate);
   }
 
   @Get(':id')

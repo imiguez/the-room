@@ -7,6 +7,7 @@ import { Message } from "types/messages.type";
 import { PeopleMessage } from "./PeopleMessage";
 import { SessionUser } from "types/users.type";
 import { MyMessage } from "./MyMessage";
+import { io } from "socket.io-client";
 
 interface IChatContainer {
   session: SessionUser | null,
@@ -41,6 +42,12 @@ export const ChatContainer: FC<IChatContainer> = ({ session }) => {
       await loadMore();
       setLoading(false);
     };
+    
+    const socket = io(`http://${process.env.NEXT_PUBLIC_BASE_URL}/common-chat`, {
+      transports: ['websocket'],
+    });
+
+    socket.on('connect', () => console.log('Connection was successful.'));
 
     firstLoad();
 
@@ -50,7 +57,7 @@ export const ChatContainer: FC<IChatContainer> = ({ session }) => {
     <section className={styles.scrollMessagesContainer} >
       {
         msgs.map((msg, i) => {
-          if (msg.author._id === session?._id || i%2 ==0) return <MyMessage msg={msg} key={msg._id}/>
+          if (msg.author._id === session?._id) return <MyMessage msg={msg} key={msg._id}/>
           else return <PeopleMessage msg={msg} key={msg._id}/>
         })
       }

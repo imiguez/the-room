@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import envConfigs from './env.configs';
 import { PassportModule } from '@nestjs/passport';
 import { MessagesModule } from './messages/messages.module';
+import { CommonChatModule } from './gateways/common-chat/common-chat.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { MessagesModule } from './messages/messages.module';
     UsersModule,
     AuthModule,
     MessagesModule,
+    CommonChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
