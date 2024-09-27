@@ -1,14 +1,13 @@
+import { logout } from "cookie-handler";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { logout } from "../../../cookie-handler";
-
+import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const f =  await fetch(`${process.env.NEST_HOST_URL}/api/auth/logout`, {
+  fetch(`${process.env.NEST_HOST_URL}/api/auth/logout`, {
     headers: {
       'cookie': 'connect.sid='+cookies().get('connect.sid')?.value
     }
-  });
-  if (!f.ok) redirect(process.env.NEXT_PUBLIC_BASE_URL!);
+  }).catch(e => console.log(e));
   await logout();
+  return NextResponse.next();
 }

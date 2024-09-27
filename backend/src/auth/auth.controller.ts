@@ -41,8 +41,8 @@ export class AuthController {
   @Get('logout')
   @Public()
   logoutHandler(@Req() req: Request, @Res() res: Response) {
-    if (req.session.passport.user) {
+    if (req.session?.passport?.user) {
       req.session.destroy(() => res.send('Session destroyed.').status(200));
-    }
+    } else return res.sendStatus(200);
   }
 }

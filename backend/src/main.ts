@@ -3,12 +3,13 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createClient } from 'redis';
+import RedisStore from 'connect-redis';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import * as mongoSanitize from 'express-mongo-sanitize';
 import helmet from 'helmet';
-import RedisStore from 'connect-redis';
 import { ExpressSessionUser } from './auth/types/user-express-session.type';
+import { IoAdapter } from '@nestjs/platform-socket.io';
 
 declare module 'express-session' {
   interface SessionData {
@@ -18,17 +19,17 @@ declare module 'express-session' {
   }
 }
 
+// Initialize client.
+export const redisClient = createClient({
+  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+});
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const configService = app.get(ConfigService);
   const appPort = configService.get('port');
-  const { host, port } = configService.get('redis');
 
-  // Initialize client.
-  const redisClient = createClient({
-    url: `redis://${host}:${port}`,
-  });
   redisClient.connect().catch(console.error);
 
   // Initialize store.
@@ -63,6 +64,9 @@ async function bootstrap() {
   );
   app.use(passport.initialize());
   app.use(passport.session());
+
+  // Use IoAdapter to integrate Socket.IO with Express session
+  app.useWebSocketAdapter(new IoAdapter(app));
 
   await app.listen(appPort);
 

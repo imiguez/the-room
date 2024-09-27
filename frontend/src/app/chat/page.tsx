@@ -1,9 +1,7 @@
 'use server'
 
 import { getSession } from "cookie-handler";
-import Nav from "./components/Nav";
-import MessageImput from "./components/MessageInput";
-import { ChatContainer } from "./components/ChatContainer";
+import { ClientChatRoom } from "./components/ClientChatRoom";
 
 
 export default async function ChatRoom() {
@@ -11,11 +9,7 @@ export default async function ChatRoom() {
 
   return (
     <main className={'main'}>
-      <Nav session={session} />
-
-      <ChatContainer session={session}/>
-
-      <MessageImput />
+      <ClientChatRoom session={session}/>
     </main>
   );
 }

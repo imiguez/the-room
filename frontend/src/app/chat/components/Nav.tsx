@@ -1,41 +1,28 @@
-'use client'
+'use client';
 
 import React, { FC, useState } from 'react';
-import Image from 'next/image';
-import { SessionUser } from 'types/users.type';
-import { useRouter } from 'next/navigation';
-import styles from "../page.module.css";
+import styles from '../page.module.css';
+import { useLogout } from 'hooks/useLogout';
+import { useSessionContext } from 'hooks/useSessionContext';
 
-interface INav {
-  session: SessionUser | null,
-}
-
-const Nav: FC<INav> = ({ session }) => {
-  const router = useRouter();
+const Nav: FC = () => {
   const [clicked, setClicked] = useState(false);
-
-  const handleLogout = async () => {
-    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`);
-    router.refresh(); // Triggers a re-render and fetches fresh session data
-  }
+  const { session } = useSessionContext()!;
+  const { logout } = useLogout();
 
   return (
     <nav className={styles.nav}>
       <div className={styles.imageContainer}>
-        {session ? 
-          <Image src={session.imageUrl} width={70} height={70} alt="profile-image" onClick={() => setClicked(!clicked)}/> 
-          : 
-          <i className="bi bi-person-circle"onClick={() => setClicked(!clicked)}/>
-        }
+        <img src={session.imageUrl} width={70} height={70} alt="profile-image" onClick={() => setClicked(!clicked)} />
       </div>
-      {clicked &&
+      {clicked && (
         <ul className={styles.navOptionsContainer}>
-          <li className={styles.navOptions} onClick={async () => await handleLogout()}>
-            <i className="bi bi-box-arrow-left" /> 
+          <li className={styles.navOptions} onClick={async () => await logout()}>
+            <i className="bi bi-box-arrow-left" />
             Log out
-            </li>
+          </li>
         </ul>
-      }
+      )}
     </nav>
   );
 };

@@ -12,7 +12,7 @@ export class MessagesService {
 
   async create(createMessageDto: CreateMessageDto): Promise<Message> {
     const createdMessage = new this.messageModel(createMessageDto);
-    return createdMessage.save();
+    return await createdMessage.save();
   }
 
   async loadMoreMessages(
