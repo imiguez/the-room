@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Query,
   Req,
   Res,
   UnauthorizedException,
@@ -23,8 +24,10 @@ export class AuthController {
   @Get('google/callback')
   @Public()
   @UseGuards(GoogleAuthGuard)
-  async googleCallback(@Res() res: Response) {
-    res.redirect(`${this.configService.get<string>('baseURL')}/auth/login`);
+  async googleCallback(@Query('error') error: string, @Res() res: Response) {
+    if (error) res.redirect(`${this.configService.get<string>('baseURL')}/`);
+    else
+      res.redirect(`${this.configService.get<string>('baseURL')}/auth/login`);
   }
 
   @Get('authenticate-frontend')

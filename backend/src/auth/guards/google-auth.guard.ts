@@ -10,4 +10,8 @@ export class GoogleAuthGuard extends AuthGuard('google') {
     await super.logIn(request);
     return activate;
   }
+
+  handleRequest<TUser = any>(err: any, user: any): TUser {
+    return user;
+  }
 }
