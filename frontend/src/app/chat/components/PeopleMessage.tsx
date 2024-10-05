@@ -13,7 +13,7 @@ export const PeopleMessage: FC<IPeopleMessage> = memo(({ msg }) => {
 
   return (
     <div className={styles.peopleMessageContainer}>
-      <img src={msg.author.imageUrl} className={styles.profileImg}/>
+      <img src={msg.author.imageUrl} className={styles.profileImg} loading='lazy'/>
       
       <>
         <span className={styles.leftTriangle} />

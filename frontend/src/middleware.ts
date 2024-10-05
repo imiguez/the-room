@@ -3,8 +3,9 @@ import { NextRequest } from 'next/server'
 import { getSession } from './cookie-handler';
  
 export async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname == '/' || request.nextUrl.pathname == '/auth/session' || request.nextUrl.pathname.includes('/icon.ico')) return NextResponse.next();
   const user = await getSession();
-  if (user || request.nextUrl.pathname == '/') return NextResponse.next();
+  if (user) return NextResponse.next();
   else return NextResponse.redirect(new URL('/', request.url));
 }
 

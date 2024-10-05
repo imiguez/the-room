@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+'use client'
+
 import { Roboto, Bungee } from "next/font/google";
 import "./globals.css";
+import { SessionContextWrapper } from "hooks/useSessionContext";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -15,10 +17,6 @@ const bungee = Bungee({
   variable: "--font-bungee"
 });
 
-export const metadata: Metadata = {
-  title: "The Room",
-  description: "",
-};
 
 export default function RootLayout({
   children,
@@ -29,9 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <title>The Room</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
       </head>
-      <body className={`${roboto.variable} ${bungee.variable}`}>{children}</body>
+      <body className={`${roboto.variable} ${bungee.variable}`}>
+        <SessionContextWrapper>
+          {children}
+        </SessionContextWrapper>
+      </body>
     </html>
   );
 }

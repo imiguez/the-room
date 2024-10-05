@@ -9,11 +9,13 @@ const Nav: FC = () => {
   const [clicked, setClicked] = useState(false);
   const { session } = useSessionContext()!;
   const { logout } = useLogout();
+  
+  if (!session) return;
 
   return (
     <nav className={styles.nav}>
       <div className={styles.imageContainer}>
-        <img src={session.imageUrl} width={70} height={70} alt="profile-image" onClick={() => setClicked(!clicked)} />
+        <img src={session.imageUrl} width={70} height={70} alt="profile-image" onClick={() => setClicked(!clicked)} loading='lazy'/>
       </div>
       {clicked && (
         <ul className={styles.navOptionsContainer}>
