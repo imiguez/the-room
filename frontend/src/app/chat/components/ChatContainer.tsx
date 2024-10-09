@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, UIEvent, useEffect, useRef, useState } from "react";
-import styles from "../page.module.css";
+import styles from "../chat.module.css";
 import { getMessages } from "../actions";
 import { PeopleMessage } from "./PeopleMessage";
 import { MyMessage } from "./MyMessage";
@@ -91,7 +91,7 @@ export const ChatContainer: FC = () => {
   }
 
   return (
-    <section className={styles.scrollMessagesContainer} ref={scrollContainerRef} onScroll={(e) => onContainerScroll(e)}>
+    <section className={'scrollMessagesContainer'} ref={scrollContainerRef} onScroll={(e) => onContainerScroll(e)}>
       {unreadMsgs && <button onClick={onUnreadMsgsBtnClick} className={styles.unreadMsgsBtn}><i className="bi bi-arrow-down-short"/></button>}
 
       {
@@ -101,9 +101,9 @@ export const ChatContainer: FC = () => {
         })
       }
 
-      {loading && <span className={`${styles.loader} ${styles.chatLoader}`} />}
+      {loading && <span className={'loader chatLoader'} />}
 
-      {!loading && loadingMore && <span className={`${styles.loader} ${styles.loadMoreLoader}`} />}
+      {!loading && loadingMore && <span className={'loader loadMoreLoader'} />}
 
       {!loading && !loadingMore && hasMorePages && <button onClick={async () => await onClickLoadMore()} className={styles.loadMoreBtn}>Load more</button>}
     </section>

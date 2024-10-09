@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import { Message } from "types/messages.type";
-import { formatDate } from "utils/date-parser.util";
-import styles from "../page.module.css";
+import { formatMessageDate } from "utils/date-parser.util";
+import styles from "../chat.module.css";
 
 
 interface IPeopleMessage {
@@ -17,10 +17,10 @@ export const PeopleMessage: FC<IPeopleMessage> = memo(({ msg }) => {
       
       <>
         <span className={styles.leftTriangle} />
-        <div className={styles.messageContainer}>
+        <div className={`commonMessageContainer ${styles.messageContainer}`}>
           <h4>{`${msg.author.firstName} ${msg.author.lastName}`}</h4>
-          <p className={styles.content}>{msg.content}</p>
-          <p className={styles.date}>{formatDate(msg.date)}</p>
+          <p className={`message ${styles.message}`}>{msg.content}</p>
+          <p className={'date'}>{formatMessageDate(msg.date)}</p>
         </div>
       </>
     </div>

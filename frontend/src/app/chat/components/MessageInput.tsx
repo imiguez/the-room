@@ -1,7 +1,7 @@
 'use client'
 
 import React, { FC, FormEvent, useState } from 'react'
-import styles from "../page.module.css";
+import styles from "../chat.module.css";
 import { Message } from 'types/messages.type';
 import { useMsgsContext } from 'hooks/useMsgsContext';
 import { useCommonChatContext } from 'hooks/useCommonChatContext';

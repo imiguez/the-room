@@ -1,0 +1,89 @@
+@media screen and (max-width: 500px) {
+
+  .title {
+    margin-top: 20px;
+  }
+
+  .chatsContainer {
+    flex-direction: column !important;
+  }
+
+  .chatContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    background-color: rgb(227, 227, 227);
+    border-bottom: 1px solid rgb(168, 168, 168);
+  }
+  
+  .profileImg {
+    width: 62px;
+    height: 62px;
+    border-radius: 60px;
+    border: 1px solid #575757;
+    margin-left: 5px;
+  }
+  
+  .messageContainer {
+    max-width: calc(100% - 69px);
+    width: 100%;
+    padding: 0 5px 0 10px;
+  }
+  
+  .nameAndDateContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4px;
+  }
+
+  .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display:inline-block;
+  }
+
+  .date {
+    padding: 0 5px;
+    color: black;
+    min-width: fit-content;
+  }
+
+  .lastMessageAndCount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .lastMessage {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display:inline-block;
+    max-width: calc(100% - 50px);
+  }
+
+  .messagesCount {
+    min-width: 22px;
+    max-width: 49px;
+    height: 22px;
+    padding: 3px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 15px;
+    border: 1px solid white;
+    text-align: center;
+    margin: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display:inline-block;
+    color: white;
+    background-color: blueviolet;
+    box-shadow:
+    -1px 1px 4px #00ffff,
+    1px -1px 4px #ff00ff;
+  }
+
+}
